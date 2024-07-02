@@ -46,6 +46,9 @@
     <!-- レイアウト -->
     <link rel="stylesheet" href="./sh.css">
 
+    <!-- model-viewer用レイアウト -->
+    <link rel="stylesheet" href="./modelviewer.css">
+
     <!-- 設定用レイアウト -->
     <link rel="stylesheet" href="../common/setting.css">
 
@@ -132,7 +135,7 @@
           disable-zoom                     
           src="../3d/cube_small.glb"
           alt="A 3D model of an armchair."        
-          style="width:80px;height:100px;"
+          style="width:150px;height:150px;"
           >
 
           <!--  
@@ -175,9 +178,12 @@
             カメラ起動ボタン  <!-- 作成したボタンに入れる文字 -->
           </button>
 
+
           <!-- AR起動ボタンのデザイン -->
-          <style>     
-            #custom-ar-button
+          <style>
+            /* 無効 */
+            /* #custom-ar-button */
+            #test
             {         
               /* ボックスの大きさ */ 
               width: 150px;    /* 幅 */
@@ -202,6 +208,7 @@
             
             }
           </style>
+
         
           <!-- それぞれの説明は上に同じコードが書いてあるのでそれを参考 -->
           <!-- 
@@ -296,15 +303,6 @@
 </html>
 
 
-
-<style>
-  .title {
-
-  }
-
-
-
-</style>
 
 
 
