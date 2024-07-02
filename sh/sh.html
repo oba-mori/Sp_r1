@@ -111,7 +111,174 @@
       <main>
 
         <!-- 最初の3Dモデル -->
-        <model-viewer src="../3d/cube_small.glb" alt="m1" auto-rotate camera-controls></model-viewer>
+        <model-viewer src="../3d/cube_small.glb" alt="m1" auto-rotate camera-controls>
+
+
+
+
+        </model-viewer>
+
+
+        <model-viewer 
+          id="dimension-demo"                 
+          ar 
+          ar-placement="floor"
+          ar-modes="webxr"               
+          ar-scale="fixed"                      
+          camera-orbit="-30deg auto auto"         
+          max-camera-orbit="auto 100deg auto"     
+          shadow-intensity="1"                          
+          camera-controls    
+          disable-zoom                     
+          src="./cube_small.glb"
+          alt="A 3D model of an armchair."        
+          style="width:800px;height:1000px;"
+          >
+
+          <!--  
+          id:id名を付ける(このHTML要素に)
+          ar:サポートされているデバイスでARエクスペリエンスを起動する機能を有効する。
+          ar-placement:オブジェクトを配置する対象を設定。(floor:床、wall:壁)  //参照  https://modelviewer.dev/docs/
+          ar-modes:有効にするARエクスペリエンスのタイプの優先リスト。("webxr":Android,iOSの両方、"webxr scene-viewer":Android、"webxr quick-look":iOS)
+          ar-scale:モデルの大きさ変更可・不可を設定。(auto:変更可、 fixed:変更不可(大きさ固定))
+          camera-orbit:カメラ関連
+          max-camera-orbit:カメラ関連
+          shadow-intensity:たぶん影の濃さ
+          camera-controls:マウス/タッチによるカメラ操作を有効にする
+          disable-zoom:ホイールによるズームを無効      
+          src:(Android用)ページにアクセスした時、最初に表示するオブジェクト(オブジェクト選択の初期表示は他の場所で設定しているため、設定によっては表示オブジェクトと異なる場合がある)
+          
+          //合っているかは分からない
+          ios-src:(iOS用)内容は上記の src と同じ　
+          
+          alt:スクリーンリーダーを使用する、または追加のセマンティックコンテキストに依存して表示内容を理解する視聴者にモデルを説明するために使用されるカスタムテキストを使用して、モデルを構成します。
+
+          styleは上記でも使用しているが、css要素
+          width:表示領域の幅, height:上記の高さ (オブジェクトだけではなく、選択肢、AR起動ボタン等、作成したもの全て)
+          
+
+          background-color:背景色を追加することができるみたい、でもここで入れても反映されない、場所が間違っている
+
+          参考
+          https://modelviewer.dev/docs/#entrydocs-augmentedreality-attributes-ar
+          -->
+
+
+
+          <!-- AR起動ボタンをカスタム -->
+          <!-- デフォルトで表示されている右下のカメラ起動ボタンを消して、新たにカメラ起動ボタンを作成 -->
+          <!-- //id：名前 -->
+          <button
+            id="custom-ar-button" 
+            slot="ar-button" 
+          >
+            カメラ起動ボタン  <!-- 作成したボタンに入れる文字 -->
+          </button>
+
+          <!-- AR起動ボタンのデザイン -->
+          <style>     
+            #custom-ar-button
+            {         
+              /* ボックスの大きさ */ 
+              width: 150px;    /* 幅 */
+              height: 40px;    /* 高さ */
+
+              /* ボックスの位置 */
+              bottom: 16px;         /* 下からの配置位置(距離)を指定(表示領域の最下端から) */
+              right: 16px;          /* 右からの配置位置(距離)を指定(表示領域の再右端から) */
+
+              /* ボックスのカスタマイズ */
+              border-radius: 6px;   /* border-radius:ボックスの4つのコーナーの角丸をまとめて指定 */
+              box-shadow: 0 2px 4px rgba(0, 0, 0, 0.25);  /* box-shadow:ボックスのフレーム周辺に影を作る */         
+              background-color: white;  /* background:ボックスの背景色指定 */
+              
+              /* フォント */
+              font-family: Futura, Helvetica Neue, sans-serif;    /* フォント指定 */
+              font-size: 16px;      /* フォントの大きさ */
+              font-weight: 400;     /* フォントの太さ */
+
+              /*？ これがないと指定した位置ではなく、左上に配置される 理由は分からない*/
+              position: absolute;   /* custom-ar-buttonというidがついたボックスに下記(div id="custom-ar-button")の配置位置を反映 */
+            
+            }
+          </style>
+        
+          <!-- それぞれの説明は上に同じコードが書いてあるのでそれを参考 -->
+          <!-- 
+            参考
+            https://www.jyuko49.com/entry/2020/07/24/135155#AR%E3%83%9C%E3%82%BF%E3%83%B3%E3%81%AE%E3%83%87%E3%82%B6%E3%82%A4%E3%83%B3%E3%82%92%E5%A4%89%E6%9B%B4%E3%81%99%E3%82%8B
+            https://modelviewer.dev/examples/augmentedreality/#customButton
+
+            デフォルトのカメラ起動ボタンはそのまま表示させておいて、追加で表示領域の外にカメラ起動ボタンを作成することもできる
+          -->
+
+
+
+          <!--  -->
+        
+          <!-- 多分寸法点の位置(dot)と寸法の表示位置(dim)などを決めている -->
+          <!-- button:クリックできるボタンを表す -->
+          <button slot="hotspot-dot+X-Y+Z" class="dot" data-position="1 -1 1" data-normal="1 0 0"></button>
+          <button slot="hotspot-dim+X-Y" class="dim" data-position="1 -1 0" data-normal="1 0 0"></button>
+          <button slot="hotspot-dot+X-Y-Z" class="dot" data-position="1 -1 -1" data-normal="1 0 0"></button>
+          <button slot="hotspot-dim+X-Z" class="dim" data-position="1 0 -1" data-normal="1 0 0"></button>
+          <button slot="hotspot-dot+X+Y-Z" class="dot show" data-position="1 1 -1" data-normal="0 1 0"></button>
+          <button slot="hotspot-dim+Y-Z" class="dim show" data-position="0 -1 -1" data-normal="0 1 0"></button>
+          <button slot="hotspot-dot-X+Y-Z" class="dot show" data-position="-1 1 -1" data-normal="0 1 0"></button>
+          <button slot="hotspot-dim-X-Z" class="dim" data-position="-1 0 -1" data-normal="-1 0 0"></button>
+          <button slot="hotspot-dot-X-Y-Z" class="dot" data-position="-1 -1 -1" data-normal="-1 0 0"></button>
+          <button slot="hotspot-dim-X-Y" class="dim" data-position="-1 -1 0" data-normal="-1 0 0"></button>
+          <button slot="hotspot-dot-X-Y+Z" class="dot" data-position="-1 -1 1" data-normal="-1 0 0"></button>
+
+
+
+
+          <!-- 左下の表示オブジェクトと寸法ONOFFを切り替えるボックスの内容　デザインは上の#controlsの所でやっている -->
+          <div id="controls" class="dim">     <!-- id:controlsという名前のついたボックスを指定 -->
+            
+            <!-- ボックスの上から1番目に表示される文字 -->
+            <label for="src">表示オブジェクト:</label>
+
+            <!-- 上記の文字の右側に表示されるボックスの要素 -->
+            <select id="src">
+              <!-- <opion value="表示させるオブジェクトファイル"> 選択肢に出てくる文字 -->
+              <option value="./cube_small.glb">cube_small(小)</option>               <!-- 選択肢の上から1番目のオブジェクトと、実際に表示される文字 -->
+              <option value="./cube_small_red.glb">cube_small(赤)</option>      <!-- 選択肢の上から2番目    〃     -->
+              <option value="./cube_small_blue.glb">cube_small(青)</option>   <!-- 選択肢の上から3番目    〃     -->
+              <option value="./cube_medium.glb">cube_medium(中)</option>          <!-- 選択肢の上から4番目    〃     -->
+              <option value="">オブジェクト無し</option>                     <!-- 選択肢の上から5番目    〃     -->
+            </select><br>
+        
+
+
+            <!-- ボックスの上から2番目に表示される文字 -->
+            <label for="show-dimensions">寸法ON/OFF:</label> 
+
+            <!-- 上記の文字の右側に表示されるボックスの要素 -->
+            <input id="show-dimensions" type="checkbox" checked="true">  <!--  -->
+          </div>
+        </model-viewer>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
         <!-- 二番目の3Dモデル -->
         <model-viewer src="../3d/cube_medium.glb" alt="m2" auto-rotate camera-controls></model-viewer>
