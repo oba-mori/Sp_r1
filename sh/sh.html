@@ -1,4 +1,4 @@
-<!-- TOP -->
+<!-- SH -->
 
 <!-- 
 
@@ -73,6 +73,20 @@
     <!-- フッターファイル読み込み用JS -->
     <script type="text/javascript" src="../common/footer.js"></script>
 
+
+        <!-- model-viewerのJSファイルを取り込む -->
+        <script
+        type="module"
+        src = "../source/model-viewer_code.js">
+  
+        //
+        //CDNによりmodel-viewerを取り込む
+        // src="https://unpkg.com/@google/model-viewer/dist/model-viewer.js"
+  
+        // >
+  
+      </script>
+
   </head>
 
 
@@ -96,6 +110,11 @@
       <!-- メイン -->
       <main>
 
+        <!-- 最初の3Dモデル -->
+        <model-viewer src="../3d/cube_small.glb" alt="m1" auto-rotate camera-controls></model-viewer>
+
+        <!-- 二番目の3Dモデル -->
+        <model-viewer src="../3d/cube_medium.glb" alt="m2" auto-rotate camera-controls></model-viewer>
 
       </main>
 
