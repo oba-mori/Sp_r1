@@ -27,3 +27,10 @@
     position: absolute;   /* custom-ar-buttonというidがついたボックスに下記(div id="custom-ar-button")の配置位置を反映 */
   
   }
+
+
+  /* 寸法を非表示にするときに使用 */
+  .hide {
+    display: none;
+  }
+  
