@@ -342,10 +342,8 @@
         modelViewer.querySelectorAll('button').forEach((hotspot) => {   //
           if (checkbox.checked) {             //チェック欄にチェックが入っている時
             hotspot.classList.remove('hide');     //表示
-            console.log('表示');
           } else {                            //チェック欄にチェックが入っていない時
             hotspot.classList.add('hide');        //非表示
-            console.log('非表示');
           }
         });
       });
@@ -368,6 +366,10 @@
 
         const center = modelViewer.getCameraTarget();   //カメラのリアルタイムの目標位置(たぶんスマホのカメラとオブジェクト回転中心点の距離だと思う)をメートル単位で、変数centerに返す  //参考 https://modelviewer.dev/examples/stagingandcameras/#panning
         const size = modelViewer.getDimensions();       //モデルの(バウンディングボックスの)寸法をメートル単位で、変数sizeに返す  //参考  https://modelviewer.dev/docs/
+        
+        console.log("Center:", center);
+        console.log("Size:", size);
+
         const x2 = size.x / 2;    //x軸の寸法の1/2を変数x2に入れる
         const y2 = size.y / 2;    //y軸        〃      y2に入れる
         const z2 = size.z / 2;    //z軸        〃      z2に入れる
